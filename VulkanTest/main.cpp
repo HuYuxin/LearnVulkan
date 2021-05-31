@@ -78,6 +78,7 @@ private:
 	std::vector<VkImage> mSwapChainImages; //handles to VkImage objects in the swap chain
 	VkFormat mSwapChainImageFormat;
 	VkExtent2D mSwapChainExtent;
+	std::vector<VkImageView> mSwapChainImageViews; //image view handles
 
 	void initWindow()
 	{
@@ -95,6 +96,7 @@ private:
 		pickPhysicalDevice();
 		createLogicalDevice();
 		createSwapChain();
+		createImageViews();
 	}
 
 	void createInstance()
@@ -270,6 +272,7 @@ private:
 		}
 	}
 
+	//===============find a physical device that has the required queue family and extensions===============//
 	void pickPhysicalDevice()
 	{
 		uint32_t deviceCount = 0;
@@ -314,6 +317,7 @@ private:
 		return indices.isComplete() && extensionsSupported && swapChainAdequate;
 	}	
 
+	//==============Querying queue families supported by the physical device===================//
 	struct QueueFamilyIndices
 	{
 		std::optional<uint32_t> graphicsFamily;
@@ -361,7 +365,7 @@ private:
 		return indices;
 	}
 
-	//Check swapchain support
+	//================Check if the physical device has swapchain extension=======================//
 	bool checkDeviceExtensionSupport(VkPhysicalDevice device)
 	{
 		uint32_t extensionCount;
@@ -411,7 +415,6 @@ private:
 
 		return details;
 	}
-	//==============Querying details of swap chain support===================//
 
 	//Return the best surface format we have
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats)
@@ -575,6 +578,36 @@ private:
 		mSwapChainExtent = extent;
 	}
 
+	void createImageViews()
+	{
+		mSwapChainImageViews.resize(mSwapChainImages.size());
+		for (size_t i = 0; i < mSwapChainImages.size(); i++)
+		{
+			VkImageViewCreateInfo createInfo{};
+			createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+			createInfo.image = mSwapChainImages[i];
+			createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+			createInfo.format = mSwapChainImageFormat;
+
+			createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+			createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+
+			createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+			createInfo.subresourceRange.baseMipLevel = 0;
+			createInfo.subresourceRange.levelCount = 1;
+			createInfo.subresourceRange.baseArrayLayer = 0;
+			createInfo.subresourceRange.layerCount = 1;
+
+			if (vkCreateImageView(mDevice, &createInfo, nullptr, &mSwapChainImageViews[i]) != VK_SUCCESS)
+			{
+				throw std::runtime_error("failed to create image views!");
+			}
+		}
+
+	}
+
 	void mainLoop()
 	{
 		while (!glfwWindowShouldClose(mWindow))
@@ -585,6 +618,10 @@ private:
 
 	void cleanup()
 	{
+		for (auto imageView : mSwapChainImageViews)
+		{
+			vkDestroyImageView(mDevice, imageView, nullptr);
+		}
 		vkDestroySwapchainKHR(mDevice, mSwapChain, nullptr);
 		vkDestroyDevice(mDevice, nullptr);
 		if (enableValidationLayers)

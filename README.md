@@ -28,3 +28,6 @@ https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Logical_device_and_queues (
 May 30th:
 https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Window_surface (30 min)
 https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Swap_chain (90 min)
+
+May 31st:
+https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views (15 min)
