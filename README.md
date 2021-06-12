@@ -31,3 +31,12 @@ https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Swap_chain (90 mi
 
 May 31st:
 https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views (15 min)
+
+June 5th:
+https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction (10 min)
+https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Shader_modules (45 min)
+https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Fixed_functions (1 hour)
+
+June 12th:
+https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Render_passes (20 min)
+https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Conclusion (15 min)
