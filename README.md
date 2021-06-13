@@ -40,3 +40,6 @@ https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Fixed
 June 12th:
 https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Render_passes (20 min)
 https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Conclusion (15 min)
+https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Framebuffers (25 min)
+https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Command_buffers (24 min)
+https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Rendering_and_presentation (1 hour)
